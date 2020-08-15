@@ -1432,6 +1432,22 @@ void CMultiWalleniusNCHypergeometric::mean(double * mu) {
       }
    }
 }
+
+
+vector<double> CMultiWalleniusNCHypergeometric::mean() {
+   // Array to hold return values from private method
+   double mu_arr[this->colors];
+   // Vector to be returned
+   vector<double> mu_vec(this->colors);
+
+   this->mean(mu_arr);
+   for (int i=0; i<this->colors; i++) {
+     mu_vec[i] = mu_arr[i];
+   }
+
+   return mu_vec;
+}
+
 /*
 void CMultiWalleniusNCHypergeometric::variance(double * var, double * mean_) {
    // calculates approximate variance and mean of multivariate 

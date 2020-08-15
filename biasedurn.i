@@ -9,6 +9,7 @@
 
 %include "stdint.i"
 %include "typemaps.i" 
+%include "std_vector.i"
 
 %include typemaps.i
 
@@ -46,7 +47,7 @@
     }
 }
 
-%typemap(in) (int32_t *m) {
+%typemap(in) (int32_t *) {
     /* Check that the input is a Python list data structure */
     if (!PyList_Check($input)) {
         PyErr_SetString(PyExc_ValueError,"Expected a Python list of values\n");
@@ -72,11 +73,11 @@
         }
     }
 }
-%typemap(typecheck) (int32_t *m) {
+%typemap(typecheck) (int32_t *) {
     $1 = PyList_Check($input);
 }
 
-%typemap(in) (double *odds) {
+%typemap(in) (double *) {
     /* Check that the input is a Python list data structure */
     if (!PyList_Check($input)) {
         PyErr_SetString(PyExc_ValueError,"Expected a Python list of values\n");
@@ -102,8 +103,16 @@
         }
     }
 }
-%typemap(typecheck) (double *m) {
+%typemap(typecheck) (double *) {
     $1 = PyList_Check($input);
+}
+
+%typemap(out) (vector<double>) {
+    $result = PyList_New($1.size());
+    for (unsigned i=0; i<$1.size(); i++) {
+        PyObject *o = PyFloat_FromDouble((double) $1[i]);
+        PyList_SetItem($result, i, o);
+    }
 }
 
 %include "urn.h"

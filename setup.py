@@ -11,11 +11,11 @@ from distutils.core import setup, Extension
 # Use swig to build files required for install
 if which('swig') is None:
     raise EnvironmentError('"swig" must be installed and present in PATH')
-run('swig -c++ -python biasedurn.i'.split())
+#run('swig -c++ -python biasedurn.i'.split())
 
 # Install module
 biasedurn_module = Extension('_biasedurn',
-                             define_macros = [('MAXCOLORS', 10000000)],
+                             define_macros = [('MAXCOLORS', 100000)],
                              sources=['biasedurn_wrap.cxx', 'urn.cpp', 'stoc3.cpp', 
                                       'stoc2.cpp', 'stoc1.cpp', 'wnchyppr.cpp', 
                                       'fnchyppr.cpp', 
