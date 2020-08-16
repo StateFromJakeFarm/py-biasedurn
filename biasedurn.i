@@ -49,10 +49,15 @@ import_array();
     }
 }
 
-/* CMultiWalleniusNCHypergeometric(int32_t n, int32_t * m, double * odds, int colors, double accuracy=1.E-8); */
-%apply (int DIM1, int64_t* IN_ARRAY1) {(int32_t n, int64_t* m)}
-%apply (int DIM1, double* IN_ARRAY1) {(int32_t n_dummy, double* odds)}
+/* CMultiWalleniusNCHypergeometric(int colors, int64_t * m, int colors_dummy, double * odds, int32_t n, double accuracy=1.E-8) */
+%apply (int DIM1, int64_t* IN_ARRAY1) {(int colors, int64_t* m)}
+%apply (int DIM1, double* IN_ARRAY1) {(int colors_dummy, double* odds)}
 
+/* CMultiWalleniusNCHypergeometric::mean(double * mu) */
+/*%apply (double ARGOUT_ARRAY1[ANY]) {(double* mu)}*/
+
+/* CMultiWalleniusNCHypergeometric::probability(int32_t n, int64_t * x) */
+%apply (int DIM1, int64_t* IN_ARRAY1) {(int32_t n, int64_t* x)}
 
 %include "urn.h"
 %include "stocc.h"

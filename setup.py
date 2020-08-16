@@ -15,7 +15,7 @@ if which('swig') is None:
 
 # Install module
 biasedurn_module = Extension('_biasedurn',
-                             define_macros = [('MAXCOLORS', 100000)],
+                             define_macros = [('MAXCOLORS', 10000)],
                              sources=['biasedurn_wrap.cxx', 'urn.cpp', 'stoc3.cpp', 
                                       'stoc2.cpp', 'stoc1.cpp', 'wnchyppr.cpp', 
                                       'fnchyppr.cpp', 

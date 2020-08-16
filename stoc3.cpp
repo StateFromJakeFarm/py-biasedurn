@@ -713,13 +713,13 @@ int32_t * source, double * weights, int32_t n, int colors) {
                 x0 = osample[c1];
                 x = WalleniusNCHyp(n1, osource[c1], osource[c1]+osource[c2], w);
                 if (x == x0) continue; // accepted
-                if (f0 < 0.) f0 = wmnc.probability(osample);
+                if (f0 < 0.) f0 = wmnc.probability(colors, osample);
                 CWalleniusNCHypergeometric nc(n1, osource[c1], osource[c1]+osource[c2], w, accuracy);
                 g0 = nc.probability(x0);
                 g1 = nc.probability(x);
                 osample[c1] = x;
                 osample[c2] = n1 - x;
-                f1 = wmnc.probability(osample);
+                f1 = wmnc.probability(colors, osample);
                 g0 = f1 * g0;  g1 = f0 * g1;
                 if (g0 >= g1 || g0 > g1 * Random()) {
                    // new state accepted

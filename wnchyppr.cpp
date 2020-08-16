@@ -1351,10 +1351,10 @@ int32_t CWalleniusNCHypergeometric::MakeTable(double * table, int32_t MaxLength,
 /***********************************************************************
 calculation methods in class CMultiWalleniusNCHypergeometric
 ***********************************************************************/
-CMultiWalleniusNCHypergeometric::CMultiWalleniusNCHypergeometric(int32_t n_, int64_t * m_, int32_t n_dummy, double * odds_, int colors_, double accuracy_) {
+CMultiWalleniusNCHypergeometric::CMultiWalleniusNCHypergeometric(int colors_, int64_t * m_, int colors_dummy, double * odds_, long n_, double accuracy_) {
     // constructor
     accuracy = accuracy_;
-    SetParameters(n_, m_, odds_, colors_);
+    SetParameters((int32_t)n_, m_, odds_, colors_);
 }
 
 
@@ -1947,6 +1947,14 @@ double CMultiWalleniusNCHypergeometric::search_inflect(double t_from, double t_t
 }
 
 
+double CMultiWalleniusNCHypergeometric::probability(int32_t n, int64_t * x_) {
+    if (n != colors) {
+        FatalError("length of x should be equal to number of colors");
+    }
+
+    return probability(x_);
+}
+
 double CMultiWalleniusNCHypergeometric::probability(int64_t * x_) {
     // calculate probability function. choosing best method
     int i, j, em;
@@ -2024,7 +2032,7 @@ double CMultiWalleniusNCHypergeometricMoments::moments(double * mu, double * var
     mean(sx);
     // round mean to integers
     for (i=0; i < colors; i++) {
-       xm[i] = (int32_t)(sx[i]+0.4999999);
+       xm[i] = (int64_t)(sx[i]+0.4999999);
     }
 
     // set up for recursive loops
@@ -2081,7 +2089,7 @@ double CMultiWalleniusNCHypergeometricMoments::loop(int32_t n, int c) {
     else {
        // last color
        xi[c] = n;
-       s1 = probability(xi);
+       s1 = probability(colors, xi);
        for (i=0; i < colors; i++) {
           sx[i]  += s1 * xi[i];
           sxx[i] += s1 * xi[i] * xi[i];
