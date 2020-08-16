@@ -201,10 +201,7 @@
 #define STOCC_H
 
 #include <math.h>
-#include <vector>
 #include "randomc.h"
-
-using std::vector;
 
 
 #ifdef R_BUILD
@@ -497,11 +494,10 @@ class CMultiWalleniusNCHypergeometric {
     // This class encapsulates the different methods for calculating the
     // multivariate Wallenius noncentral hypergeometric probability function
 public:
-    CMultiWalleniusNCHypergeometric(int32_t n, int32_t * m, double * odds, int colors, double accuracy=1.E-8); // constructor
+    CMultiWalleniusNCHypergeometric(int32_t n, int32_t * m, int32_t n_dummy, double * odds, int colors, double accuracy=1.E-8); // constructor
     void SetParameters(int32_t n, int32_t * m, double * odds, int colors); // change parameters
     double probability(int32_t * x);                        // calculate probability function
     void mean(double * mu);                                 // calculate approximate mean
-    vector<double> mean(void);
 
     // implementations of different calculation methods
 protected:
@@ -541,7 +537,7 @@ class CMultiWalleniusNCHypergeometricMoments: public CMultiWalleniusNCHypergeome
     // possible x-combinations with probability < accuracy
 public:
     CMultiWalleniusNCHypergeometricMoments(int32_t n, int32_t * m, double * odds, int colors, double accuracy=1.E-8) 
-       : CMultiWalleniusNCHypergeometric(n, m, odds, colors, accuracy) {};
+       : CMultiWalleniusNCHypergeometric(n, m, n, odds, colors, accuracy) {};
     double moments(double * mean, double * stddev, int32_t * combinations = 0);
 
 protected:

@@ -7,15 +7,17 @@
 #include "urn.h"
 %}
 
-%include "stdint.i"
+%include "numpy.i"
 %include "typemaps.i" 
-%include "std_vector.i"
 
 %include typemaps.i
 
+%init %{
+import_array();
+%}
+
 
 %typemap(in) (int* px, int nres) {
-
     /* Check that the input is a Python list data structure */
     if (!PyList_Check($input)) {
         PyErr_SetString(PyExc_ValueError,"Expected a Python list of values\n");
@@ -47,73 +49,10 @@
     }
 }
 
-%typemap(in) (int32_t *) {
-    /* Check that the input is a Python list data structure */
-    if (!PyList_Check($input)) {
-        PyErr_SetString(PyExc_ValueError,"Expected a Python list of values\n");
-        return NULL;
-    }
+/* CMultiWalleniusNCHypergeometric(int32_t n, int32_t * m, double * odds, int colors, double accuracy=1.E-8); */
+%apply (int DIM1, int* IN_ARRAY1) {(int32_t n, int32_t* m)}
+%apply (int DIM1, double* IN_ARRAY1) {(int32_t n_dummy, double* odds)}
 
-    /* Create array */
-    int len = PySequence_Length($input);
-    $1 = (int32_t*) malloc(len * sizeof(int32_t));
-
-    /* Loop over the values in the list */
-    for (int i=0; i<len; i++) {
-        /* Extract the value from the list at this location */
-        PyObject *o = PySequence_GetItem($input, i);
-
-        if (PyNumber_Check(o)) {
-            $1[i] = (int) PyFloat_AsDouble(o);
-        }
-        else {
-            free($1);
-            PyErr_SetString(PyExc_ValueError,"Expected a list of numbers\n");
-            return NULL;
-        }
-    }
-}
-%typemap(typecheck) (int32_t *) {
-    $1 = PyList_Check($input);
-}
-
-%typemap(in) (double *) {
-    /* Check that the input is a Python list data structure */
-    if (!PyList_Check($input)) {
-        PyErr_SetString(PyExc_ValueError,"Expected a Python list of values\n");
-        return NULL;
-    }
-
-    /* Create array */
-    int len = PySequence_Length($input);
-    $1 = (double*) malloc(len * sizeof(double));
-
-    /* Loop over the values in the list */
-    for (int i=0; i<len; i++) {
-        /* Extract the value from the list at this location */
-        PyObject *o = PySequence_GetItem($input, i);
-
-        if (PyNumber_Check(o)) {
-            $1[i] = (double) PyFloat_AsDouble(o);
-        }
-        else {
-            free($1);
-            PyErr_SetString(PyExc_ValueError,"Expected a list of numbers\n");
-            return NULL;
-        }
-    }
-}
-%typemap(typecheck) (double *) {
-    $1 = PyList_Check($input);
-}
-
-%typemap(out) (vector<double>) {
-    $result = PyList_New($1.size());
-    for (unsigned i=0; i<$1.size(); i++) {
-        PyObject *o = PyFloat_FromDouble((double) $1[i]);
-        PyList_SetItem($result, i, o);
-    }
-}
 
 %include "urn.h"
 %include "stocc.h"

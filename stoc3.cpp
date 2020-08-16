@@ -668,7 +668,7 @@ int32_t * source, double * weights, int32_t n, int colors) {
           // osample contains starting point for Metropolis-Hastings sampling
 
           // make object for calculating probabilities and mean
-          CMultiWalleniusNCHypergeometric wmnc(n, osource, oweights, colors2);
+          CMultiWalleniusNCHypergeometric wmnc(n, osource, n, oweights, colors2);
 
           wmnc.mean(var); // calculate mean
           // calculate approximate variance from mean

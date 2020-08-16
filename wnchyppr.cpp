@@ -1351,8 +1351,7 @@ int32_t CWalleniusNCHypergeometric::MakeTable(double * table, int32_t MaxLength,
 /***********************************************************************
 calculation methods in class CMultiWalleniusNCHypergeometric
 ***********************************************************************/
-
-CMultiWalleniusNCHypergeometric::CMultiWalleniusNCHypergeometric(int32_t n_, int32_t * m_, double * odds_, int colors_, double accuracy_) {
+CMultiWalleniusNCHypergeometric::CMultiWalleniusNCHypergeometric(int32_t n_, int32_t * m_, int32_t n_dummy, double * odds_, int colors_, double accuracy_) {
     // constructor
     accuracy = accuracy_;
     SetParameters(n_, m_, odds_, colors_);
@@ -1433,20 +1432,6 @@ void CMultiWalleniusNCHypergeometric::mean(double * mu) {
     }
 }
 
-
-vector<double> CMultiWalleniusNCHypergeometric::mean() {
-    // Array to hold return values from private method
-    double mu_arr[this->colors];
-    // Vector to be returned
-    vector<double> mu_vec(this->colors);
-
-    this->mean(mu_arr);
-    for (int i=0; i<this->colors; i++) {
-      mu_vec[i] = mu_arr[i];
-    }
-
-    return mu_vec;
-}
 
 /*
 void CMultiWalleniusNCHypergeometric::variance(double * var, double * mean_) {
