@@ -50,7 +50,7 @@ import_array();
 }
 
 /* CMultiWalleniusNCHypergeometric(int32_t n, int32_t * m, double * odds, int colors, double accuracy=1.E-8); */
-%apply (int DIM1, int* IN_ARRAY1) {(int32_t n, int32_t* m)}
+%apply (int DIM1, int64_t* IN_ARRAY1) {(int32_t n, int64_t* m)}
 %apply (int DIM1, double* IN_ARRAY1) {(int32_t n_dummy, double* odds)}
 
 

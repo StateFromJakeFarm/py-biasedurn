@@ -1351,14 +1351,14 @@ int32_t CWalleniusNCHypergeometric::MakeTable(double * table, int32_t MaxLength,
 /***********************************************************************
 calculation methods in class CMultiWalleniusNCHypergeometric
 ***********************************************************************/
-CMultiWalleniusNCHypergeometric::CMultiWalleniusNCHypergeometric(int32_t n_, int32_t * m_, int32_t n_dummy, double * odds_, int colors_, double accuracy_) {
+CMultiWalleniusNCHypergeometric::CMultiWalleniusNCHypergeometric(int32_t n_, int64_t * m_, int32_t n_dummy, double * odds_, int colors_, double accuracy_) {
     // constructor
     accuracy = accuracy_;
     SetParameters(n_, m_, odds_, colors_);
 }
 
 
-void CMultiWalleniusNCHypergeometric::SetParameters(int32_t n_, int32_t * m_, double * odds_, int colors_) {
+void CMultiWalleniusNCHypergeometric::SetParameters(int32_t n_, int64_t * m_, double * odds_, int colors_) {
     // change parameters
     int32_t N1;
     int i;
@@ -1947,7 +1947,7 @@ double CMultiWalleniusNCHypergeometric::search_inflect(double t_from, double t_t
 }
 
 
-double CMultiWalleniusNCHypergeometric::probability(int32_t * x_) {
+double CMultiWalleniusNCHypergeometric::probability(int64_t * x_) {
     // calculate probability function. choosing best method
     int i, j, em;
     int central;

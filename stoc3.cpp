@@ -436,9 +436,9 @@ int32_t * source, double * weights, int32_t n, int colors) {
     int order1[MAXCOLORS];              // sort order, index into source and destination
     int order2[MAXCOLORS];              // corresponding index into arrays when equal weights pooled together
     int order3[MAXCOLORS];              // secondary index for sorting by variance
-    int32_t osource[MAXCOLORS];         // contents of source, sorted by weight with equal weights pooled together
-    int32_t urn[MAXCOLORS];             // balls from osource not taken yet
-    int32_t osample[MAXCOLORS];         // balls sampled
+    int64_t osource[MAXCOLORS];         // contents of source, sorted by weight with equal weights pooled together
+    int64_t urn[MAXCOLORS];             // balls from osource not taken yet
+    int64_t osample[MAXCOLORS];         // balls sampled
     double oweights[MAXCOLORS];         // sorted list of weights
     double wcum[MAXCOLORS];             // list of accumulated probabilities
     double var[MAXCOLORS];              // sorted list of variance
