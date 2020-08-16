@@ -1374,6 +1374,20 @@ void CMultiWalleniusNCHypergeometric::SetParameters(int32_t n_, int64_t * m_, do
 }
 
 
+vector<double> CMultiWalleniusNCHypergeometric::mean() {
+    // Do heavy lifting
+    double* mu_arr = (double*) malloc(colors * sizeof(double));
+    mean(mu_arr);
+
+    // Package resuls into a vector for easy interaction with Python
+    vector<double> mu_vec(colors);
+    for (int i=0; i<colors; i++) {
+        mu_vec[i] = mu_arr[i];
+    }
+
+    return mu_vec;
+}
+
 void CMultiWalleniusNCHypergeometric::mean(double * mu) {
     // calculate approximate mean of multivariate Wallenius noncentral hypergeometric 
     // distribution. Result is returned in mu[0..colors-1]

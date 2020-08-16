@@ -9,6 +9,7 @@
 
 %include "numpy.i"
 %include "typemaps.i" 
+%include "std_vector.i"
 
 %include typemaps.i
 
@@ -49,12 +50,17 @@ import_array();
     }
 }
 
+%typemap(out) vector<double> {
+    $result = PyList_New($1.size());
+    for (unsigned i=0; i<$1.size(); i++) {
+        PyObject *o = PyFloat_FromDouble((double)$1[i]);
+        PyList_SetItem($result, i, o);
+    }
+}
+
 /* CMultiWalleniusNCHypergeometric(int colors, int64_t * m, int colors_dummy, double * odds, int32_t n, double accuracy=1.E-8) */
 %apply (int DIM1, int64_t* IN_ARRAY1) {(int colors, int64_t* m)}
 %apply (int DIM1, double* IN_ARRAY1) {(int colors_dummy, double* odds)}
-
-/* CMultiWalleniusNCHypergeometric::mean(double * mu) */
-/*%apply (double ARGOUT_ARRAY1[ANY]) {(double* mu)}*/
 
 /* CMultiWalleniusNCHypergeometric::probability(int32_t n, int64_t * x) */
 %apply (int DIM1, int64_t* IN_ARRAY1) {(int32_t n, int64_t* x)}

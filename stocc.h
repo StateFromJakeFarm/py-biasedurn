@@ -201,7 +201,10 @@
 #define STOCC_H
 
 #include <math.h>
+#include <vector>
 #include "randomc.h"
+
+using std::vector;
 
 
 #ifdef R_BUILD
@@ -498,6 +501,7 @@ public:
     void SetParameters(int32_t n, int64_t * m, double * odds, int colors); // change parameters
     double probability(int32_t n, int64_t * x);             // calculate probability function
     void mean(double * mu);                                 // calculate approximate mean
+    vector<double> mean();
 
     // implementations of different calculation methods
 protected:
