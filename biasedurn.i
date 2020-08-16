@@ -59,11 +59,11 @@ import_array();
 }
 
 /* CMultiWalleniusNCHypergeometric(int colors, int64_t * m, int colors_dummy, double * odds, int32_t n, double accuracy=1.E-8) */
-%apply (int DIM1, int64_t* IN_ARRAY1) {(int colors, int64_t* m)}
-%apply (int DIM1, double* IN_ARRAY1) {(int colors_dummy, double* odds)}
+%apply (int64_t* IN_ARRAY1, int DIM1) {(int64_t* m, int colors)}
+%apply (double* IN_ARRAY1, int DIM1) {(double* odds, int colors_dummy)}
 
 /* CMultiWalleniusNCHypergeometric::probability(int32_t n, int64_t * x) */
-%apply (int DIM1, int64_t* IN_ARRAY1) {(int32_t n, int64_t* x)}
+%apply (int64_t* IN_ARRAY1, int DIM1) {(int64_t* x, int32_t n)}
 
 %include "urn.h"
 %include "stocc.h"

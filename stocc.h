@@ -497,9 +497,9 @@ class CMultiWalleniusNCHypergeometric {
     // This class encapsulates the different methods for calculating the
     // multivariate Wallenius noncentral hypergeometric probability function
 public:
-    CMultiWalleniusNCHypergeometric(int colors, int64_t * m, int colors_dummy, double * odds, long n, double accuracy=1.E-8); // constructor
+    CMultiWalleniusNCHypergeometric(int64_t * m, int colors, double * odds, int colors_dummy, long n, double accuracy=1.E-8); // constructor
     void SetParameters(int32_t n, int64_t * m, double * odds, int colors); // change parameters
-    double probability(int32_t n, int64_t * x);             // calculate probability function
+    double probability(int64_t * x, int32_t n);             // calculate probability function
     void mean(double * mu);                                 // calculate approximate mean
     vector<double> mean();                                  // easy interfacing with mean(double*) from Python
 
@@ -544,7 +544,7 @@ class CMultiWalleniusNCHypergeometricMoments: public CMultiWalleniusNCHypergeome
     // possible x-combinations with probability < accuracy
 public:
     CMultiWalleniusNCHypergeometricMoments(int32_t n, int64_t * m, double * odds, int colors, double accuracy=1.E-8) 
-       : CMultiWalleniusNCHypergeometric(n, m, n, odds, colors, accuracy) {};
+       : CMultiWalleniusNCHypergeometric(m, colors, odds, colors, n, accuracy) {};
     double moments(double * mean, double * stddev, int32_t * combinations = 0);
 
 protected:
