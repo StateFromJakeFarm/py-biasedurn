@@ -50,12 +50,22 @@ import_array();
     }
 }
 
-%typemap(out) vector<double> {
-    $result = PyList_New($1.size());
-    for (unsigned i=0; i<$1.size(); i++) {
-        PyObject *o = PyFloat_FromDouble((double)$1[i]);
-        PyList_SetItem($result, i, o);
-    }
+/* CFishersNCHypergeometric::moments(double * mean, double * var) */
+%typemap(in, numinputs=0) (double* mean, double* var) (double temp_mean, double temp_var) {
+    $1 = &temp_mean;
+    $2 = &temp_var;
+}
+%typemap(argout) (double* mean, double* var) {
+    // double -> PyFloat
+    PyObject *mean = PyFloat_FromDouble(*$1);
+    PyObject *var = PyFloat_FromDouble(*$2);
+
+    // Return tuple of (mean, variance)
+    PyObject *tuple = PyTuple_New(2);
+    PyTuple_SetItem(tuple, 0, mean);
+    PyTuple_SetItem(tuple, 1, var);
+
+    $result = tuple;
 }
 
 /* CMultiWalleniusNCHypergeometric(int colors, int64_t * m, int colors_dummy, double * odds, int32_t n, double accuracy=1.E-8) */
@@ -64,6 +74,15 @@ import_array();
 
 /* CMultiWalleniusNCHypergeometric::probability(int32_t n, int64_t * x) */
 %apply (int64_t* IN_ARRAY1, int DIM1) {(int64_t* x, int32_t n)}
+
+/* CMultiWalleniusNCHypergeometric::mean() */
+%typemap(out) vector<double> {
+    $result = PyList_New($1.size());
+    for (unsigned i=0; i<$1.size(); i++) {
+        PyObject *o = PyFloat_FromDouble((double)$1[i]);
+        PyList_SetItem($result, i, o);
+    }
+}
 
 %include "urn.h"
 %include "stocc.h"

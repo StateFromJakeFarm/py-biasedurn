@@ -30,7 +30,7 @@
 Methods for class CFishersNCHypergeometric
 ***********************************************************************/
 
-CFishersNCHypergeometric::CFishersNCHypergeometric(int32_t n, int32_t m, int32_t N, double odds, double accuracy) {
+CFishersNCHypergeometric::CFishersNCHypergeometric(long n, long m, long N, double odds, double accuracy) {
     // constructor
     // set parameters
     this->n = n;  this->m = m;  this->N = N;
@@ -51,7 +51,7 @@ CFishersNCHypergeometric::CFishersNCHypergeometric(int32_t n, int32_t m, int32_t
 }
 
 
-int32_t CFishersNCHypergeometric::mode(void) {
+long CFishersNCHypergeometric::mode(void) {
     // Find mode (exact)
     // Uses the method of Liao and Rosen, The American Statistician, vol 55,
     // no 4, 2001, p. 366-369.
@@ -137,7 +137,7 @@ double CFishersNCHypergeometric::moments(double * mean_, double * var_) {
 }
 
 
-double CFishersNCHypergeometric::probability(int32_t x) {
+double CFishersNCHypergeometric::probability(long x) {
     // calculate probability function
     const double accur = accuracy * 0.1;// accuracy of calculation
 
@@ -181,7 +181,7 @@ double CFishersNCHypergeometric::probability(int32_t x) {
     return exp(lng(x)) * rsum;          // function value
 }
 
-double CFishersNCHypergeometric::probabilityRatio(int32_t x, int32_t x0) {
+double CFishersNCHypergeometric::probabilityRatio(long x, long x0) {
     // Calculate probability ratio f(x)/f(x0)
     // This is much faster than calculating a single probability because
     // rsum is not needed
@@ -232,7 +232,7 @@ double CFishersNCHypergeometric::probabilityRatio(int32_t x, int32_t x0) {
     return f1;
 }
 
-double CFishersNCHypergeometric::MakeTable(double * table, int32_t MaxLength, int32_t * xfirst, int32_t * xlast, double cutoff) {
+double CFishersNCHypergeometric::MakeTable(double * table, long MaxLength, long * xfirst, long * xlast, double cutoff) {
     // Makes a table of Fisher's noncentral hypergeometric probabilities.
     // Results are returned in the array table of size MaxLength.
     // The values are scaled so that the highest value is 1. The return value

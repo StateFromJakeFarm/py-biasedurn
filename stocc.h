@@ -545,7 +545,7 @@ class CMultiWalleniusNCHypergeometricMoments: public CMultiWalleniusNCHypergeome
 public:
     CMultiWalleniusNCHypergeometricMoments(int32_t n, int64_t * m, double * odds, int colors, double accuracy=1.E-8) 
        : CMultiWalleniusNCHypergeometric(m, colors, odds, colors, n, accuracy) {};
-    double moments(double * mean, double * stddev, int32_t * combinations = 0);
+    double moments(double * mu, double * variance, int32_t * combinations = 0);
 
 protected:
     // functions used internally
@@ -568,13 +568,13 @@ class CFishersNCHypergeometric {
     // This class contains methods for calculating the univariate Fisher's
     // noncentral hypergeometric probability function
 public:
-    CFishersNCHypergeometric(int32_t n, int32_t m, int32_t N, double odds, double accuracy = 1E-8); // constructor
-    double probability(int32_t x);                          // calculate probability function
-    double probabilityRatio(int32_t x, int32_t x0);         // calculate probability f(x)/f(x0)
-    double MakeTable(double * table, int32_t MaxLength, int32_t * xfirst, int32_t * xlast, double cutoff = 0.); // make table of probabilities
+    CFishersNCHypergeometric(long n, long m, long N, double odds, double accuracy = 1E-8); // constructor
+    double probability(long x);                             // calculate probability function
+    double probabilityRatio(long x, long x0);               // calculate probability f(x)/f(x0)
+    double MakeTable(double * table, long MaxLength, long * xfirst, long * xlast, double cutoff = 0.); // make table of probabilities
     double mean(void);                                      // calculate approximate mean
     double variance(void);                                  // approximate variance
-    int32_t mode(void);                                     // calculate mode (exact)
+    long   mode(void);                                      // calculate mode (exact)
     double moments(double * mean, double * var);            // calculate exact mean and variance
 
 protected:
