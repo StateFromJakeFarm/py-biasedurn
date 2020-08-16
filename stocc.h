@@ -501,7 +501,7 @@ public:
     void SetParameters(int32_t n, int64_t * m, double * odds, int colors); // change parameters
     double probability(int32_t n, int64_t * x);             // calculate probability function
     void mean(double * mu);                                 // calculate approximate mean
-    vector<double> mean();
+    vector<double> mean();                                  // easy interfacing with mean(double*) from Python
 
     // implementations of different calculation methods
 protected:
