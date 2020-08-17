@@ -2033,7 +2033,26 @@ double CMultiWalleniusNCHypergeometric::probability(int64_t * x_) {
 Methods for CMultiWalleniusNCHypergeometricMoments
 ***********************************************************************/
 
-double CMultiWalleniusNCHypergeometricMoments::moments(double * mu, double * variance, int32_t * combinations) {
+pair<vector<double>, vector<double>> CMultiWalleniusNCHypergeometricMoments::moments() {
+    // Do heavy lifting
+    double* mean_arr = (double*) malloc(colors * sizeof(double));
+    double* variance_arr = (double*) malloc(colors * sizeof(double));
+    moments(mean_arr, variance_arr, NULL);
+
+    // Package results into vectors
+    vector<double> mean_vec(colors);
+    vector<double> variance_vec(colors);
+    for (int i=0; i<colors; i++) {
+        mean_vec[i] = mean_arr[i];
+        variance_vec[i] = variance_arr[i];
+    }
+    delete mean_arr; delete variance_arr;
+
+    return make_pair(mean_vec, variance_vec);
+}
+
+
+double CMultiWalleniusNCHypergeometricMoments::moments(double * mu, double * variance, int * combinations) {
     // calculates mean and variance of multivariate Wallenius noncentral 
     // hypergeometric distribution by calculating all combinations of x-values.
     // Return value = sum of all probabilities. The deviation of this value 

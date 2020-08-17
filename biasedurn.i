@@ -68,9 +68,11 @@ import_array();
     PyTuple_SetItem($result, 1, var);
 }
 
-%apply (int64_t* IN_ARRAY1, int DIM1) {(int64_t* m, int colors), /* CMultiWalleniusNCHypergeometric constructor, CMultiFishersNCHypergeometric constructor */
+%apply (int64_t* IN_ARRAY1, int DIM1) {(int64_t* m, int colors), /* CMultiWalleniusNCHypergeometric constructor, CMultiFishersNCHypergeometric constructor,
+                                                                    CMultiWalleniusNCHypergeometricMoments constructor */
                                        (int64_t* x, int colors)} /* CMultiFishersNCHypergeometric::probability, CMultiFishersNCHypergeometric::lng */
-%apply (double* IN_ARRAY1, int DIM1) {(double* odds, int colors_dummy)} /* CMultiWalleniusNCHypergeometric constructor, CMultiFishersNCHypergeometric constructor */
+%apply (double* IN_ARRAY1, int DIM1) {(double* odds, int colors_dummy)} /* CMultiWalleniusNCHypergeometric constructor, CMultiFishersNCHypergeometric constructor
+                                                                           CMultiWalleniusNCHypergeometricMoments constructor */
 %apply (int64_t* IN_ARRAY1, int DIM1) {(int64_t* x, int32_t n)} /* CMultiWalleniusNCHypergeometric::probability */
 
 /* CMultiWalleniusNCHypergeometric::mean */

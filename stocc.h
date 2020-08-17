@@ -545,9 +545,10 @@ class CMultiWalleniusNCHypergeometricMoments: public CMultiWalleniusNCHypergeome
     // Wallenius noncentral hypergeometric distribution by calculating all the 
     // possible x-combinations with probability < accuracy
 public:
-    CMultiWalleniusNCHypergeometricMoments(int32_t n, int64_t * m, double * odds, int colors, double accuracy=1.E-8) 
-       : CMultiWalleniusNCHypergeometric(m, colors, odds, colors, n, accuracy) {};
+    CMultiWalleniusNCHypergeometricMoments(int64_t * m, int colors, double * odds, int colors_dummy, long n, double accuracy=1.E-8)
+       : CMultiWalleniusNCHypergeometric(m, colors, odds, colors_dummy, n, accuracy) {};
     double moments(double * mu, double * variance, int32_t * combinations = 0);
+    pair<vector<double>, vector<double>> moments(); // easy interfacting with moments(...) from Python
 
 protected:
     // functions used internally
