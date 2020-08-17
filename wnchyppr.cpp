@@ -332,14 +332,14 @@ int NumSD (double accuracy) {
 Methods for class CWalleniusNCHypergeometric
 ***********************************************************************/
 
-CWalleniusNCHypergeometric::CWalleniusNCHypergeometric(int32_t n_, int32_t m_, int32_t N_, double odds_, double accuracy_) {
+CWalleniusNCHypergeometric::CWalleniusNCHypergeometric(int n_, int m_, int N_, double odds_, double accuracy_) {
     // constructor
     accuracy = accuracy_;
     SetParameters(n_, m_, N_, odds_);
 }
 
 
-void CWalleniusNCHypergeometric::SetParameters(int32_t n_, int32_t m_, int32_t N_, double odds) {
+void CWalleniusNCHypergeometric::SetParameters(int n_, int m_, int N_, double odds) {
     // change parameters
     if (n_ < 0 || n_ > N_ || m_ < 0 || m_ > N_ || odds < 0) FatalError("Parameter out of range in CWalleniusNCHypergeometric");
     n = n_; m = m_; N = N_; omega = odds;          // set parameters
@@ -1199,7 +1199,7 @@ double CWalleniusNCHypergeometric::probability(int32_t x_) {
 }
 
 
-int32_t CWalleniusNCHypergeometric::MakeTable(double * table, int32_t MaxLength, int32_t * xfirst, int32_t * xlast, double cutoff) {
+int CWalleniusNCHypergeometric::MakeTable(double * table, int MaxLength, int * xfirst, int * xlast, double cutoff) {
     // Makes a table of Wallenius noncentral hypergeometric probabilities 
     // table must point to an array of length MaxLength. 
     // The function returns 1 if table is long enough. Otherwise it fills
@@ -1224,11 +1224,11 @@ int32_t CWalleniusNCHypergeometric::MakeTable(double * table, int32_t MaxLength,
     double y, y1;                       // probability. Save old p[x] before it is overwritten
     double d1, d2, dcom;                // divisors in probability formula
     double area;                        // estimate of area needed for recursion method
-    int32_t xi, nu;                     // xi, nu = recursion values of x, n
-    int32_t x1, x2;                     // lowest and highest x or xi
-    int32_t i1, i2;                     // index into table
-    int32_t UseTable;                   // 1 if table method used
-    int32_t LengthNeeded;               // Necessary table length
+    int xi, nu;                         // xi, nu = recursion values of x, n
+    int x1, x2;                         // lowest and highest x or xi
+    int i1, i2;                         // index into table
+    int UseTable;                       // 1 if table method used
+    int LengthNeeded;                   // Necessary table length
 
     // special cases
     if (n == 0 || m == 0) {x1 = 0; goto DETERMINISTIC;}

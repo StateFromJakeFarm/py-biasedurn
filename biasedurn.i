@@ -51,7 +51,8 @@ import_array();
     }
 }
 
-/* CFishersNCHypergeometric::moments(double * mean, double * var) */
+/* CFishersNCHypergeometric::moments */
+/* CWalleniusNCHypergeometric::moments */
 %typemap(in, numinputs=0) (double* mean, double* var) (double temp_mean, double temp_var) {
     $1 = &temp_mean;
     $2 = &temp_var;
