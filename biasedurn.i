@@ -69,6 +69,7 @@ import_array();
 }
 
 /* CMultiWalleniusNCHypergeometric(int colors, int64_t * m, int colors_dummy, double * odds, int32_t n, double accuracy=1.E-8) */
+/* CMultiFishersNCHypergeometric(long * m, int colors, double * odds, int colors_dummy, long n, double accuracy = 1E-9) */
 %apply (int64_t* IN_ARRAY1, int DIM1) {(int64_t* m, int colors)}
 %apply (double* IN_ARRAY1, int DIM1) {(double* odds, int colors_dummy)}
 

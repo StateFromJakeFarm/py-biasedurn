@@ -607,18 +607,18 @@ class CMultiFishersNCHypergeometric {
     // probability or moments is proportional to the total number of
     // possible x combinations, which may be extreme!
 public:
-    CMultiFishersNCHypergeometric(int32_t n, int32_t * m, double * odds, int colors, double accuracy = 1E-9); // constructor
-    double probability(int32_t * x);                        // calculate probability function
+    CMultiFishersNCHypergeometric(int64_t * m, int colors, double * odds, int colors_dummy, long n, double accuracy = 1E-9); // constructor
+    double probability(int * x);                            // calculate probability function
     void mean(double * mu);                                 // calculate approximate mean
     void variance(double * var);                            // calculate approximate variance
-    double moments(double * mean, double * stddev, int32_t * combinations = 0); // calculate exact mean and variance
+    double moments(double * mean, double * stddev, long * combinations = 0); // calculate exact mean and variance
 
 protected:
     double lng(int32_t * x);                                // natural log of proportional function
     void SumOfAll(void);                                    // calculates sum of proportional function for all x combinations
     double loop(int32_t n, int c);                          // recursive loops used by SumOfAll
-    int32_t n, N;                                           // copy of parameters
-    int32_t * m;
+    int64_t n, N;                                           // copy of parameters
+    int64_t * m;
     double * odds;
     int colors;
     double logodds[MAXCOLORS];                              // log odds

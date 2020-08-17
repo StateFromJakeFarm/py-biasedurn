@@ -384,9 +384,9 @@ double CFishersNCHypergeometric::lng(int32_t x) {
 calculation methods in class CMultiFishersNCHypergeometric
 ***********************************************************************/
 
-CMultiFishersNCHypergeometric::CMultiFishersNCHypergeometric(int32_t n_, int32_t * m_, double * odds_, int colors_, double accuracy_) {
+CMultiFishersNCHypergeometric::CMultiFishersNCHypergeometric(int64_t * m_, int colors_, double * odds_, int colors_dummy, long n_, double accuracy_) {
     // constructor
-    int32_t N1;
+    int64_t N1;
     int i;
     // copy parameters
     n = n_;  m = m_;  odds = odds_;  colors = colors_;  accuracy = accuracy_;
@@ -481,7 +481,7 @@ void CMultiFishersNCHypergeometric::variance(double * var) {
 }
 
 
-double CMultiFishersNCHypergeometric::probability(int32_t * x) {
+double CMultiFishersNCHypergeometric::probability(int * x) {
     // Calculate probability function.
     // Note: The first-time call takes very long time because it requires
     // a calculation of all possible x combinations with probability >
@@ -508,7 +508,7 @@ double CMultiFishersNCHypergeometric::probability(int32_t * x) {
 }
 
 
-double CMultiFishersNCHypergeometric::moments(double * mean, double * variance, int32_t * combinations) {
+double CMultiFishersNCHypergeometric::moments(double * mean, double * variance, long * combinations) {
     // calculates mean and variance of the Fisher's noncentral hypergeometric 
     // distribution by calculating all combinations of x-values with
     // probability > accuracy.

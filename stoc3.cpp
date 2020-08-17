@@ -1053,8 +1053,8 @@ int32_t * source, double * weights, int32_t n, int colors) {
     int order1[MAXCOLORS];              // sort order, index into source and destination
     int order2[MAXCOLORS];              // corresponding index into osource when equal weights pooled together
     int order3[MAXCOLORS];              // secondary index for sorting by variance
-    int32_t osource[MAXCOLORS];         // contents of source, sorted by weight with equal weights pooled together
-    int32_t osample[MAXCOLORS];         // balls sampled, sorted by weight
+    int64_t osource[MAXCOLORS];         // contents of source, sorted by weight with equal weights pooled together
+    int64_t osample[MAXCOLORS];         // balls sampled, sorted by weight
     double oweights[MAXCOLORS];         // sorted list of weights
     double var[MAXCOLORS];              // sorted list of variance
     int32_t x = 0;                      // univariate sample
@@ -1211,7 +1211,7 @@ int32_t * source, double * weights, int32_t n, int colors) {
        }
 
        // calculate variance
-       CMultiFishersNCHypergeometric(n, osource, oweights, colors2).variance(var); 
+       CMultiFishersNCHypergeometric(osource, colors2, oweights, colors2, n).variance(var); 
 
        // sort again, this time by variance
        for (i=0; i < colors2-1; i++) {
