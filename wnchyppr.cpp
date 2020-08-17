@@ -1384,6 +1384,7 @@ vector<double> CMultiWalleniusNCHypergeometric::mean() {
     for (int i=0; i<colors; i++) {
         mu_vec[i] = mu_arr[i];
     }
+    delete mu_arr;
 
     return mu_vec;
 }

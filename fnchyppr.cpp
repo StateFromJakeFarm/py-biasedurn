@@ -483,6 +483,7 @@ vector<double> CMultiFishersNCHypergeometric::variance() {
     for (int i=0; i<colors; i++) {
         var_vec[i] = var_arr[i];
     }
+    delete var_arr;
 
     return var_vec;
 }
@@ -535,6 +536,25 @@ double CMultiFishersNCHypergeometric::probability(int64_t * x, int colors) {
 
     if (sn == 0) SumOfAll();            // first time initialize
     return exp(lng(x, colors)) * rsum;          // function value
+}
+
+
+pair<vector<double>, vector<double>> CMultiFishersNCHypergeometric::moments() {
+    // Do heavy lifting
+    double* mean_arr = (double*) malloc(colors * sizeof(double));
+    double* variance_arr = (double*) malloc(colors * sizeof(double));
+    moments(mean_arr, variance_arr, NULL);
+
+    // Package results into vectors
+    vector<double> mean_vec(colors);
+    vector<double> variance_vec(colors);
+    for (int i=0; i<colors; i++) {
+        mean_vec[i] = mean_arr[i];
+        variance_vec[i] = variance_arr[i];
+    }
+    delete mean_arr; delete variance_arr;
+
+    return make_pair(mean_vec, variance_vec);
 }
 
 

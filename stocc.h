@@ -202,9 +202,11 @@
 
 #include <math.h>
 #include <vector>
+#include <utility>
 #include "randomc.h"
 
 using std::vector;
+using std::pair;
 
 
 #ifdef R_BUILD
@@ -614,6 +616,7 @@ public:
     void variance(double * var);                            // calculate approximate variance
     vector<double> variance();                              // easy interfacing with variance(double*) from Python
     double moments(double * mean, double * stddev, long * combinations = 0); // calculate exact mean and variance
+    pair<vector<double>, vector<double>> moments();         // easy interfacting with moments(...) from Python
 
 protected:
     double lng(int64_t * x, int colors);                    // natural log of proportional function
