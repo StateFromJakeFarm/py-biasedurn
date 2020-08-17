@@ -608,15 +608,17 @@ class CMultiFishersNCHypergeometric {
     // possible x combinations, which may be extreme!
 public:
     CMultiFishersNCHypergeometric(int64_t * m, int colors, double * odds, int colors_dummy, long n, double accuracy = 1E-9); // constructor
-    double probability(int * x);                            // calculate probability function
+    double probability(int64_t * x, int colors);            // calculate probability function
     void mean(double * mu);                                 // calculate approximate mean
+    vector<double> mean();                                  // easy interfacing with mean(double*) from Python
     void variance(double * var);                            // calculate approximate variance
+    vector<double> variance();                              // easy interfacing with variance(double*) from Python
     double moments(double * mean, double * stddev, long * combinations = 0); // calculate exact mean and variance
 
 protected:
-    double lng(int32_t * x);                                // natural log of proportional function
+    double lng(int64_t * x, int colors);                    // natural log of proportional function
     void SumOfAll(void);                                    // calculates sum of proportional function for all x combinations
-    double loop(int32_t n, int c);                          // recursive loops used by SumOfAll
+    double loop(int64_t n, int c);                          // recursive loops used by SumOfAll
     int64_t n, N;                                           // copy of parameters
     int64_t * m;
     double * odds;
@@ -628,12 +630,12 @@ protected:
     double accuracy;                                        // accuracy of calculation
 
     // data used by used by SumOfAll
-    int32_t xi[MAXCOLORS];                                  // x vector to calculate probability of
-    int32_t xm[MAXCOLORS];                                  // rounded approximate mean of x[i]
-    int32_t remaining[MAXCOLORS];                           // number of balls of color > c in urn
+    int64_t xi[MAXCOLORS];                                  // x vector to calculate probability of
+    int64_t xm[MAXCOLORS];                                  // rounded approximate mean of x[i]
+    int64_t remaining[MAXCOLORS];                           // number of balls of color > c in urn
     double sx[MAXCOLORS];                                   // sum of x*f(x) or mean
     double sxx[MAXCOLORS];                                  // sum of x^2*f(x) or variance
-    int32_t sn;                                             // number of possible combinations of x
+    int64_t sn;                                             // number of possible combinations of x
 };
 
 #endif

@@ -85,5 +85,9 @@ import_array();
     }
 }
 
+/* CMultiFishersNCHypergeometric::probability(int64_t * x, int colors) */
+/* CMultiFishersNCHypergeometric::lng(int64_t * x, int colors) */
+%apply (int64_t* IN_ARRAY1, int DIM1) {(int64_t* x, int colors)}
+
 %include "urn.h"
 %include "stocc.h"

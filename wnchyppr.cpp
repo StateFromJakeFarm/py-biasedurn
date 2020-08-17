@@ -1388,6 +1388,7 @@ vector<double> CMultiWalleniusNCHypergeometric::mean() {
     return mu_vec;
 }
 
+
 void CMultiWalleniusNCHypergeometric::mean(double * mu) {
     // calculate approximate mean of multivariate Wallenius noncentral hypergeometric 
     // distribution. Result is returned in mu[0..colors-1]
