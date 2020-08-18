@@ -79,20 +79,22 @@ import_array();
 /* CMultiFishersNCHypergeometric::mean */
 /* CMultiFishersNCHypergeometric::variance */
 %typemap(out) vector<double> {
-    $result = PyList_New($1.size());
-    for (unsigned i=0; i<$1.size(); i++) {
-        PyObject* o = PyFloat_FromDouble((double)$1[i]);
+    vector<double> subs = $1;
+    $result = PyList_New(subs.size());
+    for (unsigned i=0; i<subs.size(); i++) {
+        PyObject* o = PyFloat_FromDouble((double)subs[i]);
         PyList_SetItem($result, i, o);
     }
 }
 
 /* CMultiFishersNCHypergeometric::moments */
 %typemap(out) pair< vector<double>, vector<double> > {
-    PyObject* mean = PyList_New($1.first.size());
-    PyObject* variance = PyList_New($1.second.size());
-    for (unsigned i=0; i<$1.first.size(); i++) {
-        PyList_SetItem(mean, i, PyFloat_FromDouble((double)$1.first[i]));
-        PyList_SetItem(variance, i, PyFloat_FromDouble((double)$1.second[i]));
+    pair< vector<double>, vector<double> > subs = $1;
+    PyObject* mean = PyList_New(subs.first.size());
+    PyObject* variance = PyList_New(subs.second.size());
+    for (unsigned i=0; i<subs.first.size(); i++) {
+        PyList_SetItem(mean, i, PyFloat_FromDouble((double)subs.first[i]));
+        PyList_SetItem(variance, i, PyFloat_FromDouble((double)subs.second[i]));
     }
 
     $result = PyTuple_New(2);
