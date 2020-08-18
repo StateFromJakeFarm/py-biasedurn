@@ -87,7 +87,7 @@ import_array();
 }
 
 /* CMultiFishersNCHypergeometric::moments */
-%typemap(out) pair<vector<double>, vector<double>> {
+%typemap(out) pair< vector<double>, vector<double> > {
     PyObject* mean = PyList_New($1.first.size());
     PyObject* variance = PyList_New($1.second.size());
     for (unsigned i=0; i<$1.first.size(); i++) {

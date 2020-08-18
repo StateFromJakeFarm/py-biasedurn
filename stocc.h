@@ -548,7 +548,7 @@ public:
     CMultiWalleniusNCHypergeometricMoments(int64_t * m, int colors, double * odds, int colors_dummy, long n, double accuracy=1.E-8)
        : CMultiWalleniusNCHypergeometric(m, colors, odds, colors_dummy, n, accuracy) {};
     double moments(double * mu, double * variance, int32_t * combinations = 0);
-    pair<vector<double>, vector<double>> moments(); // easy interfacting with moments(...) from Python
+    pair< vector<double>, vector<double> > moments(); // easy interfacting with moments(...) from Python
 
 protected:
     // functions used internally
@@ -617,7 +617,7 @@ public:
     void variance(double * var);                            // calculate approximate variance
     vector<double> variance();                              // easy interfacing with variance(double*) from Python
     double moments(double * mean, double * stddev, long * combinations = 0); // calculate exact mean and variance
-    pair<vector<double>, vector<double>> moments();         // easy interfacting with moments(...) from Python
+    pair< vector<double>, vector<double> > moments();         // easy interfacting with moments(...) from Python
 
 protected:
     double lng(int64_t * x, int colors);                    // natural log of proportional function

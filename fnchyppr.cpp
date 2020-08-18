@@ -539,7 +539,7 @@ double CMultiFishersNCHypergeometric::probability(int64_t * x, int colors) {
 }
 
 
-pair<vector<double>, vector<double>> CMultiFishersNCHypergeometric::moments() {
+pair< vector<double>, vector<double> > CMultiFishersNCHypergeometric::moments() {
     // Do heavy lifting
     double* mean_arr = (double*) malloc(colors * sizeof(double));
     double* variance_arr = (double*) malloc(colors * sizeof(double));

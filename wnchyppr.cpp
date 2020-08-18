@@ -2033,7 +2033,7 @@ double CMultiWalleniusNCHypergeometric::probability(int64_t * x_) {
 Methods for CMultiWalleniusNCHypergeometricMoments
 ***********************************************************************/
 
-pair<vector<double>, vector<double>> CMultiWalleniusNCHypergeometricMoments::moments() {
+pair< vector<double>, vector<double> > CMultiWalleniusNCHypergeometricMoments::moments() {
     // Do heavy lifting
     double* mean_arr = (double*) malloc(colors * sizeof(double));
     double* variance_arr = (double*) malloc(colors * sizeof(double));
